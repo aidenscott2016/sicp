@@ -1,9 +1,95 @@
+* Chapter 1
+** 1.1
 #+BEGIN_SRC scheme
-(define (factorial n)
-  (if (< n 2) 1
-      (* n (factorial (- n 1)))))
-(factorial 10)
+10
+12
+8
+3
+6
+a = 3
+b = 4
+19
+false
+4
+16
+6
+16
 #+END_SRC
 
 #+RESULTS:
-: 3628800
+   correct
+
+** 1.2
+#+BEGIN_SRC scheme
+( / ( + 5 
+        4 
+        (- 2 (- 3 (+ 6 (/ 4 5)))))
+    (* 3
+       (- 6 2)
+       (- 2 7)))
+
+#+END_SRC
+
+#+RESULTS:
+: -37/150
+- Pretty printing is hard
+
+** 1.3
+#+BEGIN_SRC scheme -t
+(define (square a ) (* a a ))
+(define (sumSquare a b) (+ (square a) (square b)))
+
+(define (sumSquareLargest a b c)
+  ( cond 
+    ((and (>= a c) (>= b c)) (sumSquare a b))
+    ((and (>= b a) (>= c a)) (sumSquare b c))
+    ((and (>= a b) (>= c b)) (sumSquare c a))
+  )
+)
+
+(sumSquareLargest 1 2 3)
+#+END_SRC**
+
+#+RESULTS:
+: 13
+- you had to look at the answers to figure out the criteria for finding the biggest two
+- need to figure out how to get multiple results
+
+** 1.4
+- A compound procedure is a procudure defined in terms of primitive procedures
+- Expression are expanded when needed and then reduced
+- if b > 0 return + else -
+- use return value on paremeters
+
+** 1.5
+*** The test
+#+BEGIN_SRC scheme
+(define (p) (p))
+(define (test x y)
+  (if (= x 0)
+      0
+      y))
+
+(test 0 (p))
+#+END_SRC
+*** If applicative order
+#+BEGIN_SRC scheme 
+(if (= 0 0) 0 (p))
+(if (#t) 0 (p))
+0
+#+END_SRC
+*** If normal order
+#+BEGIN_SRC scheme 
+(if (= 0 0)
+    0
+    (p))) ;What is p? Error??
+#+END_SRC
+- You seem to have mixed up normal and applicative order.
+- Other than that your normal (actually applicative) was almost correct. p is recursive, so it expands infinitely
+- 
+
+* Chapter 2
+sqrt x = the y such that y >= 0 and y^2 = x
+Tells you nothing about how to find out. Just what it is. Difference between
+declarative (what is is) and imperitive (how to find it)
+
